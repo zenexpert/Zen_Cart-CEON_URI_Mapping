@@ -5,11 +5,8 @@ The original documentation has NOT been updated.
 
 This repo does NOT include the UMM-Edition files that are bundled with the commercial Uri Mappings Manager (UMM). I have private repositories with fixes for those, available to users who have purchased that module.
 
-## April 2026 - Branch 3.0
-Zen Cart 3 dropped support for legacy language files (all must now be lang.), so all tweaks/development will now only be added to the 3.0 branch of this repo.
-
 ## Compatibility
-PHP8+ & current (2.2.0) Zen Cart but probably 158 onwards.
+PHP8+ & current (2.2.0) Zen Cart but probably 158 up to 2.2.0 (Zen Cart 3.0 requires language files to be in lang. format).
 
 ## Changes not fixes...
 Since I was accused of the heinous crime of offering invalid HTML from my repository (as if I could have written this plugin)...I bit the bullet and went through all the admin files to see what else would be automagically detected.  
@@ -49,6 +46,8 @@ Don't waste your time, just buy it (say I). You'll have lots of merging fun addi
 https://www.zen-cart.com/showthread.php?225478-Ceon-URI-Mapping-V5-0
 
 ## Changelog
+14/04/2026: tagged prior to converting legacy language files to .lang.
+
 07/01/2025: lots of minor nitpicks...for subsequent changes refer to the commit history.
 
 31/12/2025: remove includes\init_includes\overrides\init_add_crumbs.php. Not necessary ZC158+
