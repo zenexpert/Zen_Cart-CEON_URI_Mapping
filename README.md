@@ -1,17 +1,15 @@
 # CEON URI Mapping
 
-## 2026+ This branch is in use in production, containing many minor code changes as a result of IDE suggestions. Debugs may be triggered due to strict mode and type hinting, but are easily fixed so please report them.
+Originally based on version 5.1.1 available 11/01/2024 from ceon.net, this repository originally aimed just to collect bugfixes post 5.1.1, but has progressed way past that with very many minor code-tightening tweaks for php (in use on php 8.4/8.5)).
+The original documentation has NOT been updated.
 
-Originally based on version 5.1.1 available 11/01/2024 from ceon.net, this repository originally aimed just to collect bugfixes post 5.1.1, but has progressed way past that with very many minor code-tightening tweaks for php (in use on php 8.4).
-The original documentation has not been updated.
+This repo does NOT include the UMM-Edition files that are bundled with the commercial Uri Mappings Manager (UMM). I have private repositories with fixes for those, available to users who have purchased that module.
 
-It does NOT include the UMM-edition files that are bundled with the commercial Uri Mappings Manager (UMM). I have private repositories with fixes for those, open to users who have purchased that module.
-
-## April 2026
-Zen Cart 3 drops support for legacy language files (all must now be lang.), so all tweaks/development will now only be added to the 3.0 branch of this repo.
+## April 2026 - Branch 3.0
+Zen Cart 3 dropped support for legacy language files (all must now be lang.), so all tweaks/development will now only be added to the 3.0 branch of this repo.
 
 ## Compatibility
-PHP8+ & current (2.1.0) Zen Cart but probably 158 onwards.
+PHP8+ & current (2.2.0) Zen Cart but probably 158 onwards.
 
 ## Changes not fixes...
 Since I was accused of the heinous crime of offering invalid HTML from my repository (as if I could have written this plugin)...I bit the bullet and went through all the admin files to see what else would be automagically detected.  
@@ -24,7 +22,6 @@ I'm using these files in strict mode so am reasonably confident others should no
 All files are contained in the /files folder.  
 All files apart from those in /file/includes/template files are new and so will not overwrite existing files.  
 The files in /files/includes/templates/*CEON URI TO MERGE files should be merged into your files. Use file comparison software to compare versions.
-
 
 1. Copy the files into your development server for testing, prior to uploading to your production server: YOU HAVE BEEN WARNED!  
 As the template folders have their own names, there is no danger of overwriting existing files.
