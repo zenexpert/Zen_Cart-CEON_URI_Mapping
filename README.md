@@ -1,12 +1,17 @@
 # CEON URI Mapping
 
+## April 2026
+This is now a work in progress while the legacy language files are removed/converted and tested for use in Zen Cart 3.0 (under development).
+For current Zen Cart 2.2.0+, please use this repo release version 5.2.
+
+## History
 Originally based on version 5.1.1 available 11/01/2024 from ceon.net, this repository originally aimed just to collect bugfixes post 5.1.1, but has progressed way past that with very many minor code-tightening tweaks for php (in use on php 8.4/8.5)).
 The original documentation has NOT been updated.
 
 This repo does NOT include the UMM-Edition files that are bundled with the commercial Uri Mappings Manager (UMM). I have private repositories with fixes for those, available to users who have purchased that module.
 
 ## Compatibility
-PHP8+ & current (2.2.0) Zen Cart but probably 158 up to 2.2.0 (Zen Cart 3.0 requires language files to be in lang. format).
+PHP8+ & current (2.2.0) Zen Cart but probably 158 to Zen Cart 3.0.
 
 ## Changes not fixes...
 Since I was accused of the heinous crime of offering invalid HTML from my repository (as if I could have written this plugin)...I bit the bullet and went through all the admin files to see what else would be automagically detected.  
