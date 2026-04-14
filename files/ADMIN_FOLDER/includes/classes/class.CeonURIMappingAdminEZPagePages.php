@@ -1,5 +1,6 @@
-<?php
+<?php //TODO function call to review, obsolete attributes, TODO UMM compare
 
+declare(strict_types=1);
 /**
  * Ceon URI Mapping Zen Cart EZ-Pages Admin Functionality.
  *
@@ -10,9 +11,9 @@
  * @copyright   Copyright 2008-2019 Ceon
  * @copyright   Copyright 2003-2019 Zen Cart Development Team
  * @copyright   Portions Copyright 2003 osCommerce
- * @link        http://ceon.net/software/business/zen-cart/uri-mapping
- * @license     http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: class.CeonURIMappingAdminEZPagePages.php 2025-07-08 torvista
+ * @link        https://ceon.net/software/business/zen-cart/uri-mapping
+ * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version     $Id: class.CeonURIMappingAdminEZPagePages.php 08 Jan 2026 torvista
  */
 
 if (!defined('IS_ADMIN_FLAG')) {
@@ -104,10 +105,10 @@ class CeonURIMappingAdminEZPagePages extends CeonURIMappingAdminEZPages
 
     /**
      * Handles the Ceon URI Mapping functionality when an EZ-page is being inserted or updated.
-     *
+     * TODO review admin\includes\init_includes\init_ceon_ezpages_collect_info.php, around line 36: passes an array as $page_title
      * @access  public
      * @param  int  $page_id  The ID of the EZ-page.
-     * @param  int  $page_title  The name for the EZ-Page. TODO think this is incorrect
+     * @param  string  $page_title  The name for the EZ-Page.
      * @param  array|null  $page_titles_array  The names for the EZ-Page for the languages used by the store.
      * @return  void
      */
@@ -123,7 +124,7 @@ class CeonURIMappingAdminEZPagePages extends CeonURIMappingAdminEZPages
             $prev_uri_mapping = (isset($_POST['prev-uri-mappings'][$languages[$i]['id']])) ? trim($_POST['prev-uri-mappings'][$languages[$i]['id']]) : '';
 
             // Handle multilanguage EZ-Pages
-            if ( ! is_null($page_titles_array)) {
+            if (!is_null($page_titles_array)) {
                 $page_title = $page_titles_array[$languages[$i]['id']];
             }
 
@@ -172,7 +173,7 @@ class CeonURIMappingAdminEZPagePages extends CeonURIMappingAdminEZPages
             if ($insert_uri_mapping || $update_uri_mapping) {
                 if ($update_uri_mapping) {
                     // Consign previous mapping to the history, so old URI mapping isn't broken
-                    $this->makeURIMappingHistorical($prev_uri_mapping, $languages[$i]['id']);
+                    $this->makeURIMappingHistorical($prev_uri_mapping, (int)$languages[$i]['id']);
                 }
 
                 // Add the new URI mapping
@@ -224,7 +225,7 @@ class CeonURIMappingAdminEZPagePages extends CeonURIMappingAdminEZPages
                 }
             } elseif ($prev_uri_mapping != '' && $uri_mapping == '') {
                 // No URI mapping, consign existing mapping to the history, so old URI mapping isn't broken
-                $this->makeURIMappingHistorical($prev_uri_mapping, $languages[$i]['id']);
+                $this->makeURIMappingHistorical($prev_uri_mapping, (int)$languages[$i]['id']);
 
                 $success_message = sprintf(
                     CEON_URI_MAPPING_TEXT_EZ_PAGE_MAPPING_MADE_HISTORICAL,
@@ -426,7 +427,7 @@ class CeonURIMappingAdminEZPagePages extends CeonURIMappingAdminEZPages
 
         $num_languages = sizeof($languages);
 
-        $uri_mapping_input_fields = zen_draw_separator('pixel_black.gif', '100%', '1') .
+        $uri_mapping_input_fields = zen_draw_separator('pixel_black.gif') .
             '<p class="col-sm-3 control-label">' . CEON_URI_MAPPING_TEXT_EZ_PAGE_URI . '</p>' .
             '<div class="col-sm-9 col-md-6">' . "\n";
 
@@ -498,7 +499,7 @@ class CeonURIMappingAdminEZPagePages extends CeonURIMappingAdminEZPages
 
         $uri_mapping_input_fields .= "\n\t\t</div>";
 
-        $uri_mapping_input_fields .= zen_draw_separator('pixel_black.gif', '100%', '1');
+        $uri_mapping_input_fields .= zen_draw_separator('pixel_black.gif');
         return $uri_mapping_input_fields;
     }
 

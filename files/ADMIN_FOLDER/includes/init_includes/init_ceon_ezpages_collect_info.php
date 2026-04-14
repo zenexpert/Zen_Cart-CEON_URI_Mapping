@@ -1,4 +1,6 @@
-<?php
+<?php //TODO review function call, IDE Inspections partially done
+
+declare(strict_types=1);
 /**
  * @package     ceon_uri_mapping
  * @author      Conor Kerr <zen-cart.uri-mapping@ceon.net>
@@ -9,7 +11,6 @@
  * @link        https://ceon.net
  * $Id: init_ceon_ezpages_collect_info.php  2025-01-08 torvista
  */
-
 
 if (defined('FILENAME_EZPAGES_ADMIN') && $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN . (!strstr(FILENAME_EZPAGES_ADMIN, '.php') ? FILENAME_EZPAGES_ADMIN . '.php' : FILENAME_EZPAGES_ADMIN) && isset($_GET['action']) && $_GET['action'] == 'deleteconfirm') {
 			$pages_id = (int)zen_db_prepare_input($_POST['ezID']);
@@ -32,7 +33,8 @@ if (defined('FILENAME_EZPAGES_ADMIN') && $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN
 		unset($_SESSION['ceon_uri_mapping_ezpages_update']);
 
 		$pages_id = isset($_GET['ezID']) ? (int)$_GET['ezID'] : 0;
-		$pages_title_array = zen_db_prepare_input($_POST['pages_title']); //todo review this wrt the subsequent call to insertUpdateHandler with second parameter $pages_title_array
+        //TODO review this wrt the subsequent call to insertUpdateHandler with second parameter $pages_title_array
+		$pages_title_array = zen_db_prepare_input($_POST['pages_title']);
 
 		// BEGIN CEON URI MAPPING 1 of 4
 		require_once(DIR_WS_CLASSES . 'class.CeonURIMappingAdminEZPagePages.php');
@@ -113,7 +115,7 @@ if (defined('FILENAME_EZPAGES_ADMIN') && $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN
 				$page_error = true;
 			}
 
-			if ($page_error == false) {
+			if (!$page_error) {
 				// SET SESSION VARIABLE AWAITING REDIRECT. WHERE
 //        zen_redirect(zen_href_link(FILENAME_EZPAGES_ADMIN, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'ezID=' . $pages_id));
 

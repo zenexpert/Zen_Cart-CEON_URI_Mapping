@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /**
  * Ceon URI Mapping Database Table Name Defines.
  *
@@ -14,7 +15,7 @@
  */
 
 if (!defined('IS_ADMIN_FLAG')) {
-	die('Illegal Access');
+    die('Illegal Access');
 }
 
 define('TABLE_CEON_URI_MAPPINGS', DB_PREFIX . 'ceon_uri_mappings');

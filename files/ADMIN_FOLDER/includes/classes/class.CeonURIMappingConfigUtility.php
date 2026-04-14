@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /**
  * Ceon URI Mapping Config Utility Class.
  *
@@ -8,9 +9,9 @@
  * @copyright   Copyright 2008-2024 Ceon
  * @copyright   Copyright 2003-2019 Zen Cart Development Team
  * @copyright   Portions Copyright 2003 osCommerce
- * @link        http://ceon.net/software/business/zen-cart/uri-mapping
- * @license     http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: class.CeonURIMappingConfigUtility.php 2025-02-04 torvista
+ * @link        https://ceon.net/software/business/zen-cart/uri-mapping
+ * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version     $Id: class.CeonURIMappingConfigUtility.php 28 Jan 2026 torvista
  */
 
 /**
@@ -48,10 +49,10 @@ class CeonURIMappingConfigUtility extends CeonURIMappingVersion
 	/**
 	 * Whether auto-generation is enabled.
 	 *
-	 * @var     bool
+	 * @var     bool|null
 	 * @access  protected
 	 */
-	protected $_autogen_new = null;
+	protected ?bool $_autogen_new = null;
 
 	/**
 	 * The whitespace replacement setting for the store.
@@ -88,18 +89,18 @@ class CeonURIMappingConfigUtility extends CeonURIMappingVersion
 	/**
 	 * The add language code identifier to URI setting for the store.
 	 *
-	 * @var     int
+	 * @var     ?int
 	 * @access  protected
 	 */
-	protected $_language_code_add = null;
+	protected ?int $_language_code_add = null;
 
 	/**
 	 * The action to be taken if a URI mapping being auto-generated clashes with an existing mapping.
 	 *
-	 * @var     string
+	 * @var     null|string
 	 * @access  protected
 	 */
-	protected $_mapping_clash_action = null;
+	protected ?string $_mapping_clash_action = null;
 
 	/**
 	 * Whether product reviews pages should have their URIs auto-managed.
@@ -339,7 +340,7 @@ class CeonURIMappingConfigUtility extends CeonURIMappingVersion
 				manage_ask_a_question_mappings,
 				automatic_version_checking
 			FROM
-				' . TABLE_CEON_URI_MAPPING_CONFIGS . ' 
+				' . TABLE_CEON_URI_MAPPING_CONFIGS . '
 			WHERE
 				id = 1';
 
@@ -350,12 +351,12 @@ class CeonURIMappingConfigUtility extends CeonURIMappingVersion
 		} else {
 			$this->_installed_version = $load_config_result->fields['version'];
 
-			$this->_autogen_new = $load_config_result->fields['autogen_new'];
+            $this->_autogen_new = $load_config_result->fields['autogen_new'] === '1';
 			$this->_whitespace_replacement = $load_config_result->fields['whitespace_replacement'];
 			$this->_capitalisation = $load_config_result->fields['capitalisation'];
 			$this->_remove_words = $load_config_result->fields['remove_words'];
 			$this->_char_str_replacements = $load_config_result->fields['char_str_replacements'];
-			$this->_language_code_add = $load_config_result->fields['language_code_add'];
+			$this->_language_code_add = $load_config_result->fields['language_code_add'] === '1' ? 1 : 0;
 			$this->_mapping_clash_action = $load_config_result->fields['mapping_clash_action'];
 
 			$this->_manage_product_reviews_mappings =
@@ -438,12 +439,12 @@ class CeonURIMappingConfigUtility extends CeonURIMappingVersion
     {
 		global $db, $languages, $num_languages, $ceon_uri_mapping_demo, $messageStack;
 
-		$this->_autogen_new = $_POST['autogen-new'];
+		$this->_autogen_new = $_POST['autogen-new'] === '1';
 		$this->_whitespace_replacement = $_POST['whitespace-replacement'];
 		$this->_capitalisation = $_POST['capitalisation'];
 		$this->_remove_words = trim($_POST['remove-words']);
 		$this->_char_str_replacements = trim($_POST['char-str-replacements']);
-		$this->_language_code_add = $_POST['language-code-add'];
+		$this->_language_code_add = $_POST['language-code-add'] === '1' ? 1 : 0;
 		$this->_mapping_clash_action = trim($_POST['mapping-clash-action']);
 
 		$this->_manage_product_reviews_mappings =
@@ -602,7 +603,7 @@ class CeonURIMappingConfigUtility extends CeonURIMappingVersion
 		if (!$ceon_uri_mapping_demo && count($this->_error_messages) == 0) {
 
 			$save_config_data_array = [
-				'autogen_new' => $this->_autogen_new,
+				'autogen_new' => (int)$this->_autogen_new,
 				'whitespace_replacement' => $this->_whitespace_replacement,
 				'capitalisation' => $this->_capitalisation,
 				'remove_words' => ((strlen($this->_remove_words) == 0) ? 'null' : $this->_remove_words),

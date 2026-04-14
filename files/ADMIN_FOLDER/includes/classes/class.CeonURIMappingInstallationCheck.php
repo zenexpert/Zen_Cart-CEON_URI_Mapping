@@ -1,5 +1,6 @@
 <?php
 
+//declare(strict_types=1); multiple issues
 /**
  * Ceon URI Mapping Installation Check Class.
  *
@@ -8,9 +9,9 @@
  * @copyright   Copyright 2008-2024 Ceon
  * @copyright   Copyright 2003-2019 Zen Cart Development Team
  * @copyright   Portions Copyright 2003 osCommerce
- * @link        http://ceon.net/software/business/zen-cart/uri-mapping
- * @license     http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: class.CeonURIMappingInstallationCheck.php 2025-01-08 torvista
+ * @link        https://ceon.net/software/business/zen-cart/uri-mapping
+ * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version     $Id: class.CeonURIMappingInstallationCheck.php 08 Jan 2025 torvista
  */
 
 /**
@@ -111,7 +112,7 @@ class CeonURIMappingInstallationCheck extends CeonURIMappingVersion
 	// {{{ _lookUpAutomaticVersionCheckingEnabled()
 
 	/**
-	 * Checks if the automatic version checking funcitonality is enabled and stores the status in this instance's
+	 * Checks if the automatic version checking functionality is enabled and stores the status in this instance's
 	 * property.
 	 *
 	 * @access  protected
@@ -644,7 +645,7 @@ class CeonURIMappingInstallationCheck extends CeonURIMappingVersion
 
 	/**
 	 * Examines the store's files to check if any of the Ceon URI Mapping core file modifications are missing, or
-	 * if any old modificiations haven't been updated to the new ones. Adds the appropriate error messages to the
+	 * if any old modifications haven't been updated to the new ones. Adds the appropriate error messages to the
 	 * main error messages property.
 	 *
 	 * @access  protected
@@ -2410,9 +2411,7 @@ class CeonURIMappingInstallationCheck extends CeonURIMappingVersion
 	 */
 	protected function _getSelectedPanelID(): ?string
     {
-		$selected_panel_id = 'installation-check-panel';
-
-		return $selected_panel_id;
+        return 'installation-check-panel';
 	}
 
 	// }}}
@@ -2825,12 +2824,12 @@ class CeonURIMappingInstallationCheck extends CeonURIMappingVersion
 <script>
 <!--
 function HighlightAll(field) {
-	var el = eval("document." + field)
+	var el = eval("document." + field);
 	el.focus();
 	el.select();
 	
 	if (document.all){
-		therange = el.createTextRange()
+		therange = el.createTextRange();
 		therange.execCommand("Copy")
 	}
 }

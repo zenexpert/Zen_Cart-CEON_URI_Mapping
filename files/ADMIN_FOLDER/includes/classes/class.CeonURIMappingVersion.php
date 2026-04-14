@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /**
  * Ceon URI Mapping Version Class.
  *
@@ -8,9 +9,9 @@
  * @copyright   Copyright 2008-2024 Ceon
  * @copyright   Copyright 2003-2019 Zen Cart Development Team
  * @copyright   Portions Copyright 2003 osCommerce
- * @link        http://ceon.net/software/business/zen-cart/uri-mapping
- * @license     http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: class.CeonURIMappingVersion.php 1054 2025-01-08 torvista
+ * @link        https://ceon.net/software/business/zen-cart/uri-mapping
+ * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version     $Id: class.CeonURIMappingVersion.php 1054 2025-06-23 torvista
  */
 
 /**
@@ -41,8 +42,7 @@ class CeonURIMappingVersion extends CeonURIMappingTabbedPanelAdminInterface
 	/**
 	 * Creates a new instance of the class.
 	 *
-	 * @param  bool  $load_config  Whether or not the autogeneration configuration should be loaded when instantiating the
-	 *                    class.
+	 * @param  bool  $load_config  Whether the autogeneration configuration should be loaded when instantiating the class.
 	 * @access  public
 	 */
 	public function __construct($load_config = true)
@@ -77,11 +77,11 @@ class CeonURIMappingVersion extends CeonURIMappingTabbedPanelAdminInterface
 	 * Looks up the currently installed version and stores it in this instance's property.
 	 *
 	 * @access  protected
-	 * @return  bool   True if the version number look up completed without failure, false otherwise. The module
+	 * @return  bool   True if the version number look-up completed without failure, false otherwise. The module
 	 *                    not being installed yet is not counted as a failure.
 	 */
-	protected function _lookUpInstalledVersion()
-	{
+	protected function _lookUpInstalledVersion(): bool
+    {
 		global $db;
 
 		$table_exists_query = 'SHOW TABLES LIKE "' . TABLE_CEON_URI_MAPPING_CONFIGS . '";';
@@ -103,9 +103,10 @@ class CeonURIMappingVersion extends CeonURIMappingTabbedPanelAdminInterface
 
 			if (!$installed_version_result->EOF) {
 				$this->_installed_version = $installed_version_result->fields['version'];
-			}
+			} else {
+                return false;
+            }
 		}
-
 		return true;
 	}
 

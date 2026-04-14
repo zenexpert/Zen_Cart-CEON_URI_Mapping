@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /**
  * Ceon URI Mapping Product Page Definitions.
  *
@@ -10,36 +11,40 @@
  * @copyright   Copyright 2008-2019 Ceon
  * @copyright   Copyright 2003-2007 Zen Cart Development Team
  * @copyright   Portions Copyright 2003 osCommerce
- * @link        http://ceon.net/software/business/zen-cart/uri-mapping
- * @license     http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @link        https://ceon.net/software/business/zen-cart/uri-mapping
+ * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version     $Id: ceon_uri_mapping_product_pages.php 1027 2012-07-17 20:31:10Z conor $
  */
 
 /**
  * If the store has any custom product page types, add their info page definitions to the list.
  */
-if (empty($ceon_uri_mapping_product_pages)) $ceon_uri_mapping_product_pages = array();
+if (empty($ceon_uri_mapping_product_pages)) {
+    $ceon_uri_mapping_product_pages = [];
+}
 
-$ceon_uri_mapping_product_pages = array_merge(array(
-	FILENAME_DOCUMENT_GENERAL_INFO,
-	FILENAME_DOCUMENT_PRODUCT_INFO,
-	FILENAME_PRODUCT_INFO,
-	FILENAME_PRODUCT_BOOK_INFO,
-	FILENAME_PRODUCT_FREE_SHIPPING_INFO,
-	FILENAME_PRODUCT_MUSIC_INFO
-	), $ceon_uri_mapping_product_pages);
+$ceon_uri_mapping_product_pages = array_merge([
+    FILENAME_DOCUMENT_GENERAL_INFO,
+    FILENAME_DOCUMENT_PRODUCT_INFO,
+    FILENAME_PRODUCT_INFO,
+    FILENAME_PRODUCT_BOOK_INFO,
+    FILENAME_PRODUCT_FREE_SHIPPING_INFO,
+    FILENAME_PRODUCT_MUSIC_INFO
+], $ceon_uri_mapping_product_pages);
 
-if (empty($ceon_uri_mapping_product_related_pages)) $ceon_uri_mapping_product_related_pages = array();
-	
-$ceon_uri_mapping_product_related_pages = array_merge(array(
-	FILENAME_PRODUCT_REVIEWS,
-	FILENAME_PRODUCT_REVIEWS_INFO,
-	FILENAME_PRODUCT_REVIEWS_WRITE
-	), $ceon_uri_mapping_product_related_pages);
+if (empty($ceon_uri_mapping_product_related_pages)) {
+    $ceon_uri_mapping_product_related_pages = [];
+}
+
+$ceon_uri_mapping_product_related_pages = array_merge([
+    FILENAME_PRODUCT_REVIEWS,
+    FILENAME_PRODUCT_REVIEWS_INFO,
+    FILENAME_PRODUCT_REVIEWS_WRITE
+], $ceon_uri_mapping_product_related_pages);
 
 if (defined('FILENAME_TELL_A_FRIEND')) {
-	$ceon_uri_mapping_product_related_pages[] = FILENAME_TELL_A_FRIEND;
+    $ceon_uri_mapping_product_related_pages[] = FILENAME_TELL_A_FRIEND;
 }
 if (defined('FILENAME_ASK_A_QUESTION')) {
-	$ceon_uri_mapping_product_related_pages[] = FILENAME_ASK_A_QUESTION;
+    $ceon_uri_mapping_product_related_pages[] = FILENAME_ASK_A_QUESTION;
 }
