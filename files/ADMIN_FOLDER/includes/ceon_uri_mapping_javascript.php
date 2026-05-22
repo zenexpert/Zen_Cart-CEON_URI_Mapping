@@ -363,7 +363,9 @@ window.onload = function(){
 <?php }
 
 // displays the JavaScript necessary for
-// admin/categories.php&action=move_category - Needs development in class structure.
+// admin/categories.php&action=move_category
+// Needs development in class structure.
+// This is DISABLED: it was also disabled in original 5.1.1 code. i.e. never implemented!
 if (false &&
     defined('FILENAME_CATEGORY_PRODUCT_LISTING') &&
     $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN . (!str_contains(FILENAME_CATEGORY_PRODUCT_LISTING, '.php') ? FILENAME_CATEGORY_PRODUCT_LISTING . '.php' : FILENAME_CATEGORY_PRODUCT_LISTING) &&

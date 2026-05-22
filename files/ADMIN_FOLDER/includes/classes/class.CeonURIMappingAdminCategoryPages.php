@@ -25,7 +25,6 @@ if (!defined('IS_ADMIN_FLAG')) {
  */
 require_once(DIR_FS_CATALOG . DIR_WS_CLASSES . 'class.CeonURIMappingAdminCategories.php');
 
-
 // {{{ CeonURIMappingAdminCategoryPages
 
 /**
