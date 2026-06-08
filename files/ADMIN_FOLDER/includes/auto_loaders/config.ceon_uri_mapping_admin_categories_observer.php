@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 /**
- * Autoloader array for Ceon URI Mapping ADMIN functionality. Makes sure that Ceon URI Mapping is instantiated at the
- * right point of the Zen Cart initsystem.
+ * Autoloader array for Ceon URI Mapping ADMIN functionality.
+ * Ensures that Ceon URI Mapping is instantiated at the
+ * right breakpoint of the Zen Cart initsystem.
  *
  * @package     ceon_uri_mapping
  * @author      Conor Kerr <zen-cart.uri-mapping@ceon.net>
@@ -13,7 +14,7 @@ declare(strict_types=1);
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net
  * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     2019
+ * @version     config.ceon_uri_mapping_admin_categories_observer.php 14 May 2026 torvista
  */
 
 if (!defined('IS_ADMIN_FLAG')) {

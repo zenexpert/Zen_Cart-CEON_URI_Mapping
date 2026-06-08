@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @author Ceon Support
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * $Id: init_ceon_product_collect_info.php 2025-01-08 torvista
+ * $Id: init_ceon_product_collect_info.php 14 May 2026 torvista
  */
 
 // copy_product_confirm perform

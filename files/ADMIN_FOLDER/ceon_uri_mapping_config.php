@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        http://ceon.net/software/business/zen-cart/uri-mapping
  * @license     http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: ceon_uri_mapping_config.php 08 Jan 2026 torvista
+ * @version     $Id: ceon_uri_mapping_config.php 14 May 2026 torvista
  */
 
 require('includes/application_top.php');

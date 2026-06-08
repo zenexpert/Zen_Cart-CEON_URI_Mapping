@@ -14,7 +14,7 @@ declare(strict_types=1);
  * @copyright   Copyright 2003-2007 Zen Cart Development Team
  * @copyright   Portions Copyright 2003 osCommerce
  * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     2019 - 5.0.0
+ * @version     init_ceon_currencies.php 14 May 2026 torvista
  **/
 
 if (isset($ceon_uri_mapping)) {

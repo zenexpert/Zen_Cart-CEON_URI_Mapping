@@ -12,7 +12,7 @@ declare(strict_types=1);
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net/software/business/zen-cart/uri-mapping
  * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: config.ceon_uri_mapping.php 2025-07-10 torvista
+ * @version     $Id: config.ceon_uri_mapping.php 14 May 2026 torvista
  */
 
 if (!defined('IS_ADMIN_FLAG')) {
@@ -23,8 +23,8 @@ $autoLoadConfig[0][] = [
     'autoType' => 'class',
     'loadFile' => 'class.CeonURIMappingHandler.php',
 ];
-
-$autoLoadConfig[94][] = [
+//ZC3.0: init_languages moved earlier to breakpoint 75
+$autoLoadConfig[74][] = [
     'autoType' => 'classInstantiate',
     'className' => 'CeonURIMappingHandler',
     'objectName' => 'ceon_uri_mapping',

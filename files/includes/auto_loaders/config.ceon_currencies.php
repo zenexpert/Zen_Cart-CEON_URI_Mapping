@@ -15,7 +15,7 @@ declare(strict_types=1);
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net/software/business/zen-cart/uri-mapping
  * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: config.ceon_currencies.php 1027 2019-04-24 20:31:10Z conor v5.0.0 Ceon Support$
+ * @version     $Id: config.ceon_currencies.php 14 May 2026 torvista
  **/
 
 /**

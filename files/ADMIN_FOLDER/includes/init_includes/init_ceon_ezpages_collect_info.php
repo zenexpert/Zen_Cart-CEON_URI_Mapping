@@ -1,4 +1,4 @@
-<?php //TODO review function call, IDE Inspections partially done
+<?php
 
 declare(strict_types=1);
 /**
@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @copyright   Copyright 2003-2019 Zen Cart Development Team
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net
- * $Id: init_ceon_ezpages_collect_info.php  2025-01-08 torvista
+ * $Id: init_ceon_ezpages_collect_info.php 14 May 2026 torvista
  */
 
 if (defined('FILENAME_EZPAGES_ADMIN') && $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN . (!strstr(FILENAME_EZPAGES_ADMIN, '.php') ? FILENAME_EZPAGES_ADMIN . '.php' : FILENAME_EZPAGES_ADMIN) && isset($_GET['action']) && $_GET['action'] == 'deleteconfirm') {

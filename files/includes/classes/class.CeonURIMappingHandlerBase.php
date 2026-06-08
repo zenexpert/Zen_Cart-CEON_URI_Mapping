@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net/software/business/zen-cart/uri-mapping
  * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: class.CeonURIMappingHandlerBase.php 12 Jan 2026 torvista
+ * @version     $Id: class.CeonURIMappingHandlerBase.php 14 May 2026 torvista
  */
 
 if (!defined('IS_ADMIN_FLAG')) {
@@ -140,8 +140,9 @@ class CeonURIMappingHandlerBase extends CeonURIMappingDBLookup
 		// Run the language initsystem code here as, for some strange reason, it runs late in the initsystem
 		// process and the Ceon URI Mapping module must run before the sanitize initsystem script which normally
 		// precedes the language initsystem code.
+
         // 16/12/2025 ZC 2.2.0:https://github.com/zencart/zencart/commit/e2bd93e73a9dd717e77278cc716c10e43b3c2503
-        // init_languages moved to breakpoint 75, so this function is longer required from this version onewards
+        // init_languages moved to breakpoint 75, so this function is no longer required from this version onwards
 		$this->_initLanguageSystem();
 
 		$current_uri_is_index_page = $this->_checkForAndHandleIndexPage();
@@ -336,7 +337,8 @@ class CeonURIMappingHandlerBase extends CeonURIMappingDBLookup
 
 		if (!isset($_SESSION['language']) || isset($_GET['language'])) {
 
-			$lng = new language();
+			//note that without a language parameter, $lng->language is an array of DEFAULT_LANGUAGE
+            $lng = new language();
 
 			if (isset($_GET['language']) && zen_not_null($_GET['language'])) {
 				// The user has selected a different language

@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net/software/business/zen-cart/uri-mapping
  * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: class.CeonURIMappingAdminProductPages.php 21 May torvista
+ * @version     $Id: class.CeonURIMappingAdminProductPages.php 14 May 2026 torvista
  */
 
 if (!defined('IS_ADMIN_FLAG')) {
@@ -1143,7 +1143,7 @@ class CeonURIMappingAdminProductPages extends CeonURIMappingAdminProducts
 
 			$copy_selected = $product_has_mappings && !$this->_autogenEnabled();
 
-			if ($this->_autogenEnabled()) {
+            if ($this->_autogenEnabled()) {
 				if ($num_languages == 1) {
 					$autogen_message = CEON_URI_MAPPING_TEXT_COPY_AUTOGEN_URI;
 				} else {
@@ -1187,7 +1187,6 @@ class CeonURIMappingAdminProductPages extends CeonURIMappingAdminProducts
 
 			$uri_mapping_input_fields .=
 				zen_draw_radio_field('uri-mapping', 'ignore', false) . ' ' . $ignore_message;
-
 			$uri_mapping_input_fields .= '</p>';
 
 			return $uri_mapping_input_fields;

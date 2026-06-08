@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net/software/business/zen-cart/uri-mapping
  * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: class.CeonURIMappingHandler.php 07 Mar 2026 torvista
+ * @version     $Id: class.CeonURIMappingHandler.php 14 May 2026 torvista
  */
 
 if (!defined('IS_ADMIN_FLAG')) {
@@ -216,8 +216,8 @@ class CeonURIMappingHandler extends CeonURIMappingHandlerBase
 
 		// Have matched a Zen Cart page to initialise
 
-		// Is the URI a current URI or should an attempt be made to find the current URI to redirect to? Or has the
-		// user just changed the language so an attempt should be made to find the current URI for the new
+		// Is the URI a current URI or should an attempt be made to find the current URI to redirect to?
+        // Or has the user just changed the language so an attempt should be made to find the current URI for the new
 		// language?
 		// Don't perform redirect checks if a form is being posted, as any redirect would break the post
 		if (count($_POST) == 0 && ($current_uri != 1 || $this->_language_changed)) {
@@ -311,7 +311,7 @@ class CeonURIMappingHandler extends CeonURIMappingHandlerBase
 				FROM
 					" . TABLE_LANGUAGES . "
 				WHERE
-					languages_id = '" . (int) $language_id . "';";
+					languages_id = " . (int)$language_id;
 
 			$language_info_result = $db->Execute($language_info_query);
 
@@ -358,16 +358,16 @@ class CeonURIMappingHandler extends CeonURIMappingHandlerBase
 
 			} elseif ($main_page == FILENAME_ASK_A_QUESTION) {
 				// Have found an Ask A Question Page.
-				if (isset($_GET['pid']) && str_contains($_GET['pid'], ':')) {
+				if (isset($_GET['pID']) && str_contains($_GET['pID'], ':')) {
 					// Query string parameter includes information about selected attributes (which is added when
 					// linking from shopping cart to a product info page) so don't override the parameter's value
 
 				} else {
-					$_GET['pid'] = $associated_db_id;
+					$_GET['pID'] = $associated_db_id;
 				}
 				// Rebuild the cPath variable for this page if it doesn't exist
 				if (!isset($_GET['cPath'])) {
-					$_GET['cPath'] = zen_get_product_path($_GET['pid']);
+					$_GET['cPath'] = zen_get_product_path($_GET['pID']);
 				}
 
 			} else {
@@ -456,7 +456,7 @@ class CeonURIMappingHandler extends CeonURIMappingHandlerBase
 			}
 		} elseif (in_array($_GET['main_page'], $ceon_uri_mapping_product_pages) ||
 				in_array($_GET['main_page'], $ceon_uri_mapping_product_related_pages)) {
-			$associated_db_id = !empty($_GET['products_id']) ? $_GET['products_id'] : (!empty($_GET['pid']) ? $_GET['pid'] : 0);
+			$associated_db_id = !empty($_GET['products_id']) ? $_GET['products_id'] : (!empty($_GET['pID']) ? $_GET['pID'] : 0);
 
 		} elseif ($_GET['main_page'] == FILENAME_EZPAGES || $_GET['main_page'] == FILENAME_EZPAGES_POPUP) {
 			$associated_db_id = !empty($_GET['id']) ? $_GET['id'] : 0;
@@ -515,7 +515,7 @@ class CeonURIMappingHandler extends CeonURIMappingHandlerBase
 						unset($_GET['cPath']);
 					}
 
-					unset($_GET['products_id'], $_GET['pid']);
+					unset($_GET['products_id'], $_GET['pID']);
 
 				} elseif ($_GET['main_page'] == FILENAME_EZPAGES ||
 						$_GET['main_page'] == FILENAME_EZPAGES_POPUP) {
@@ -610,7 +610,7 @@ class CeonURIMappingHandler extends CeonURIMappingHandlerBase
 					break;
 
 				case FILENAME_ASK_A_QUESTION:
-					$_GET['pid'] = $associated_db_id;
+					$_GET['pID'] = $associated_db_id;
 
 
 					break;

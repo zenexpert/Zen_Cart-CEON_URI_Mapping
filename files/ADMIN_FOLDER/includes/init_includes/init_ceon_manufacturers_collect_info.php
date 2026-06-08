@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @copyright   Copyright 2003-2019 Zen Cart Development Team
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net
- * $Id: init_ceon_manufacturers_collect_info.php 2025-01-08 torvista
+ * $Id: init_ceon_manufacturers_collect_info.php 14 May 2026 torvista
  */
 
 if (defined('FILENAME_MANUFACTURERS') &&
@@ -64,3 +64,4 @@ if (defined('FILENAME_MANUFACTURERS') &&
 	//	zen_redirect(zen_href_link(FILENAME_MANUFACTURERS, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'mID=' . $manufacturers_id));
 	$_SESSION['ceon_uri_mapping_manufacturers_' . $_GET['action']] = $_POST;
 }
+
