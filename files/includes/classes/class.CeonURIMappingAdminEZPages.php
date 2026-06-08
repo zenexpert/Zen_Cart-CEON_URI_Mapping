@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @copyright   Portions Copyright 2003 osCommerce
  * @link        https://ceon.net/software/business/zen-cart/uri-mapping
  * @license     https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version     $Id: class.CeonURIMappingAdminEZPages.php 08 Jan 2026 torvista
+ * @version     $Id: class.CeonURIMappingAdminEZPages.php 08 June 2026 torvista
  */
 
 if (!defined('IS_ADMIN_FLAG')) {
@@ -94,6 +94,8 @@ class CeonURIMappingAdminEZPages extends CeonURIMappingAdmin
 				AND
 					languages_id = " . (int) $language_id);
 
+            // handle empty page_title
+            $ez_page_name_result->fields['pages_title'] = empty($ez_page_name_result->fields['pages_title']) ? '' : $ez_page_name_result->fields['pages_title'];
 			$ez_page_name = $ez_page_name_result->fields['pages_title'];
 
 		} else {
