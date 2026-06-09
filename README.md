@@ -14,7 +14,9 @@ This repo does NOT include the UMM-Edition files that are bundled with the comme
 
 ## Removal of Tell-A-Friend references
 This functionality was removed from ZC long ago.  
-You can remove debris of this from the CEON tables using these queries in the ZC Admin->SQL Patch Tool (assuming you do not use table prefixes).  
+You should remove the debris of this from the CEON tables using these queries in the ZC Admin->SQL Patch Tool (assuming you do not use table prefixes).
+Otherwise a debug warning may occur if those tables are queried.
+
 Read what the SQL Patch tool says BEFORE executing these queries!
 ~~~~sql
 ALTER TABLE `ceon_uri_mapping_configs` DROP `manage_tell_a_friend_mappings`;  
