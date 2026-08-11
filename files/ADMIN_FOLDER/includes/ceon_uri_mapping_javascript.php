@@ -80,7 +80,7 @@ if (defined('FILENAME_PRODUCT') &&
             ?>;
 
             // Scope the DOM search to the product form to avoid external sideboxes
-            let mainForm = document.forms['new_product'];
+            let mainForm = document.forms['update_product'] || document.forms['insert_product'];
             let classList = mainForm ? mainForm.getElementsByClassName("row") : document.getElementsByClassName("row");
 
             let place = classList[classList.length - 1];
