@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @copyright Copyright 2003-2024 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: ceon_uri_mapping_javascript.php 28 Jan 2026 torvista
+ * @version $Id: ceon_uri_mapping_javascript.php 11 Aug 2026 zenexpert
  */
 
 // displays the JavaScript necessary for
@@ -15,84 +15,101 @@ declare(strict_types=1);
 // admin/product.php&action=update_product
 // admin/product.php&action=insert_product
 if (defined('FILENAME_PRODUCT') &&
-    $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN . (!str_contains(FILENAME_PRODUCT, '.php') ? FILENAME_PRODUCT . '.php' : FILENAME_PRODUCT) &&
-    isset($_GET['action']) &&
-    ($_GET['action'] == 'new_product' || $_GET['action'] == 'update_product' || ($_GET['action'] == 'insert_product' && empty($_GET['pID'])))) {
-	$ceon_class_name = 'form-group';
-?>
-	<script title="ceon_uri_mapping_javascript(<?=__LINE__ ?>)">
-window.onload = function(){
-	let ceonUriMappingURI = document.createElement("div");
-	ceonUriMappingURI.setAttribute("class", "<?= $ceon_class_name ?>");
-	ceonUriMappingURI.innerHTML = <?php
-	$languages = zen_get_languages();
-	if (empty($ceon_uri_mapping_admin) || !is_object($ceon_uri_mapping_admin)) {
-		if (!class_exists('CeonURIMappingAdminProductPages')) {
-			require_once(DIR_WS_CLASSES . 'class.CeonURIMappingAdminProductPages.php');
-		}
-		$ceon_uri_mapping_admin = empty($GLOBALS['ceon_uri_mapping_admin']) ? new CeonURIMappingAdminProductPages() : $GLOBALS['ceon_uri_mapping_admin'];
-	}
-	echo json_encode($ceon_uri_mapping_admin->collectInfoBuildURIMappingForm());
-    ?>;
+        $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN . (!str_contains(FILENAME_PRODUCT, '.php') ? FILENAME_PRODUCT . '.php' : FILENAME_PRODUCT) &&
+        isset($_GET['action']) &&
+        ($_GET['action'] == 'new_product' || $_GET['action'] == 'update_product' || ($_GET['action'] == 'insert_product' && empty($_GET['pID'])))) {
+    $ceon_class_name = 'form-group';
+    ?>
+    <script title="ceon_uri_mapping_javascript(<?=__LINE__ ?>)">
+        window.onload = function(){
+            let ceonUriMappingURI = document.createElement("div");
+            ceonUriMappingURI.setAttribute("class", "<?= $ceon_class_name ?>");
+            ceonUriMappingURI.innerHTML = <?php
+            $languages = zen_get_languages();
+            if (empty($ceon_uri_mapping_admin) || !is_object($ceon_uri_mapping_admin)) {
+                if (!class_exists('CeonURIMappingAdminProductPages')) {
+                    require_once(DIR_WS_CLASSES . 'class.CeonURIMappingAdminProductPages.php');
+                }
+                $ceon_uri_mapping_admin = empty($GLOBALS['ceon_uri_mapping_admin']) ? new CeonURIMappingAdminProductPages() : $GLOBALS['ceon_uri_mapping_admin'];
+            }
+            echo json_encode($ceon_uri_mapping_admin->collectInfoBuildURIMappingForm());
+            ?>;
 
-    let classList = document.getElementsByClassName("<?= $ceon_class_name ?>");
-	let place = classList[classList.length - 1];
-	if (!classList.length) {
-		let formList = document.forms;
-		place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
-	}
-	place.parentElement.appendChild(ceonUriMappingURI);
-};
-	</script>
+            // Scope the DOM search to the product form to avoid appending to external sideboxes
+            let mainForm = document.forms['new_product'];
+            let classList = mainForm ? mainForm.getElementsByClassName("<?= $ceon_class_name ?>") : document.getElementsByClassName("<?= $ceon_class_name ?>");
+
+            let place = classList[classList.length - 1];
+            if (!classList.length) {
+                let formList = document.forms;
+                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            }
+
+            if (place && place.parentElement) {
+                place.parentElement.appendChild(ceonUriMappingURI);
+            }
+        };
+    </script>
 <?php }
 
 // displays the JavaScript necessary for
 // admin/product.php&action=new_product_preview
 if (defined('FILENAME_PRODUCT') &&
-    $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN . (!str_contains(FILENAME_PRODUCT, '.php') ? FILENAME_PRODUCT . '.php' : FILENAME_PRODUCT) &&
-    isset($_GET['action']) && ($_GET['action'] == 'new_product_preview')) {
-	$ceon_class_name = 'row';
-?>
-	<script title="ceon_uri_mapping_javascript(<?=__LINE__ ?>)">
-window.onload = function(){
-	let formList;
-	let ceonUriMappingGeneratedURI = document.createElement("div");
-	ceonUriMappingGeneratedURI.setAttribute("class", "<?= $ceon_class_name ?>");
-	ceonUriMappingGeneratedURI.innerHTML = <?php
-	$languages = zen_get_languages();
-	if (empty($ceon_uri_mapping_admin) || !is_object($ceon_uri_mapping_admin)) {
-		if (!class_exists('CeonURIMappingAdminProductPages')) {
-			require_once(DIR_WS_CLASSES . 'class.CeonURIMappingAdminProductPages.php');
-		}
-		$ceon_uri_mapping_admin = empty($GLOBALS['ceon_uri_mapping_admin']) ? new CeonURIMappingAdminProductPages() : $GLOBALS['ceon_uri_mapping_admin'];
-	}
-    $ceonUriMappingPreview = '<p class="control-label">' . CEON_URI_MAPPING_TEXT_PRODUCT_URI . '</p>';
-    for ($i = 0, $n = count($languages); $i < $n; $i++) {
-		$ceonUriMappingPreview .= $ceon_uri_mapping_admin->productPreviewExportURIMappingInfo($languages[$i]);
-	}
-	echo json_encode($ceonUriMappingPreview);
-    ?>;
+        $_SERVER['SCRIPT_NAME'] == DIR_WS_ADMIN . (!str_contains(FILENAME_PRODUCT, '.php') ? FILENAME_PRODUCT . '.php' : FILENAME_PRODUCT) &&
+        isset($_GET['action']) && ($_GET['action'] == 'new_product_preview')) {
+    $ceon_class_name = 'row';
+    ?>
+    <script title="ceon_uri_mapping_javascript(<?=__LINE__ ?>)">
+        window.onload = function(){
+            let formList;
+            let ceonUriMappingGeneratedURI = document.createElement("div");
+            ceonUriMappingGeneratedURI.setAttribute("class", "<?= $ceon_class_name ?>");
+            ceonUriMappingGeneratedURI.innerHTML = <?php
+            $languages = zen_get_languages();
+            if (empty($ceon_uri_mapping_admin) || !is_object($ceon_uri_mapping_admin)) {
+                if (!class_exists('CeonURIMappingAdminProductPages')) {
+                    require_once(DIR_WS_CLASSES . 'class.CeonURIMappingAdminProductPages.php');
+                }
+                $ceon_uri_mapping_admin = empty($GLOBALS['ceon_uri_mapping_admin']) ? new CeonURIMappingAdminProductPages() : $GLOBALS['ceon_uri_mapping_admin'];
+            }
+            $ceonUriMappingPreview = '<p class="control-label">' . CEON_URI_MAPPING_TEXT_PRODUCT_URI . '</p>';
+            for ($i = 0, $n = count($languages); $i < $n; $i++) {
+                $ceonUriMappingPreview .= $ceon_uri_mapping_admin->productPreviewExportURIMappingInfo($languages[$i]);
+            }
+            echo json_encode($ceonUriMappingPreview);
+            ?>;
 
-	let classList = document.getElementsByClassName("row");
-	let place = classList[classList.length - 1];
-	if (!classList.length) {
-		formList = document.forms;
-		place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
-	}
-	place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+            // Scope the DOM search to the product form to avoid external sideboxes
+            let mainForm = document.forms['new_product'];
+            let classList = mainForm ? mainForm.getElementsByClassName("row") : document.getElementsByClassName("row");
 
-	let ceonUriMappingHiddenURI = document.createElement("div");
-	ceonUriMappingHiddenURI.innerHTML = <?= json_encode($ceon_uri_mapping_admin->productPreviewBuildHiddenFields()) ?>;
-	classList = document.getElementsByClassName("row text-right");
-	place = classList[classList.length - 1];
-	if (!classList.length) {
-		formList = document.forms;
-		place = formList[formList.length - 1][formList[formList.length - 1].length - 1]; //.lastChild;
-	}
-	place.appendChild(ceonUriMappingHiddenURI);
-//  place.parentElement.appendChild(ceonUriMappingHiddenURI);
-};
-	</script>
+            let place = classList[classList.length - 1];
+            if (!classList.length) {
+                formList = document.forms;
+                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            }
+
+            if (place && place.parentElement) {
+                place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+            }
+
+            let ceonUriMappingHiddenURI = document.createElement("div");
+            ceonUriMappingHiddenURI.innerHTML = <?= json_encode($ceon_uri_mapping_admin->productPreviewBuildHiddenFields()) ?>;
+
+            // Target the specific row inside the main form
+            classList = mainForm ? mainForm.getElementsByClassName("row text-right") : document.getElementsByClassName("row text-right");
+            place = classList[classList.length - 1];
+
+            if (!classList.length) {
+                formList = document.forms;
+                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            }
+
+            if (place) {
+                place.appendChild(ceonUriMappingHiddenURI);
+            }
+        };
+    </script>
 <?php }
 
 // displays the JavaScript necessary for
