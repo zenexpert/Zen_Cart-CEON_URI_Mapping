@@ -125,7 +125,8 @@ if (defined('FILENAME_PRODUCT') &&
             let hiddenPlace;
             if (mainForm) {
                 let classList = mainForm.getElementsByClassName("row text-right");
-                hiddenPlace = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
+                // Safely fallback directly to the form instead of its last child
+                hiddenPlace = classList.length > 0 ? classList[classList.length - 1] : mainForm;
             }
 
             if (!hiddenPlace) {
@@ -135,8 +136,8 @@ if (defined('FILENAME_PRODUCT') &&
                 } else {
                     let formList = document.forms;
                     if (formList.length > 0) {
-                        let lastForm = formList[formList.length - 1];
-                        hiddenPlace = lastForm[lastForm.length - 1];
+                        // Fallback directly to the last form wrapper
+                        hiddenPlace = formList[formList.length - 1];
                     }
                 }
             }
@@ -274,7 +275,7 @@ if (defined('FILENAME_EZPAGES_ADMIN') &&
             echo json_encode($ceon_uri_mapping_admin->buildEZPageURIMappingFieldsForm());
             ?>;
 
-            let mainForm = document.forms['ezpage_form'];
+            let mainForm = document.forms['new_page'];
             let place;
 
             if (mainForm) {
@@ -363,7 +364,7 @@ if (defined('FILENAME_CATEGORY_PRODUCT_LISTING') &&
             echo json_encode(/*utf8_encode*/($ceonUriMappingMoveProduct));
             ?>;
 
-            let mainForm = document.forms['move_product'];
+            let mainForm = document.forms['products'];
             let place;
 
             if (mainForm) {
