@@ -37,12 +37,26 @@ if (defined('FILENAME_PRODUCT') &&
 
             // Scope the DOM search to the product form to avoid appending to external sideboxes
             let mainForm = document.forms['new_product'] || document.forms['update_product'] || document.forms['insert_product'];
-            let classList = mainForm ? mainForm.getElementsByClassName("<?= $ceon_class_name ?>") : document.getElementsByClassName("<?= $ceon_class_name ?>");
+            let place;
 
-            let place = classList[classList.length - 1];
-            if (!classList.length) {
-                let formList = document.forms;
-                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("<?= $ceon_class_name ?>");
+                // Anchor to the last class inside the form, or fallback to the very end of the form itself
+                place = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
+            }
+
+            // Global fallback ONLY if mainForm wasn't found on the page at all
+            if (!place) {
+                let classList = document.getElementsByClassName("<?= $ceon_class_name ?>");
+                if (classList.length > 0) {
+                    place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
+                }
             }
 
             if (place && place.parentElement) {
@@ -81,12 +95,24 @@ if (defined('FILENAME_PRODUCT') &&
 
             // Scope the DOM search to the product form to avoid external sideboxes
             let mainForm = document.forms['update_product'] || document.forms['insert_product'];
-            let classList = mainForm ? mainForm.getElementsByClassName("row") : document.getElementsByClassName("row");
+            let place;
 
-            let place = classList[classList.length - 1];
-            if (!classList.length) {
-                formList = document.forms;
-                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("row");
+                place = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
+            }
+
+            if (!place) {
+                let classList = document.getElementsByClassName("row");
+                if (classList.length > 0) {
+                    place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
+                }
             }
 
             if (place && place.parentElement) {
@@ -96,17 +122,27 @@ if (defined('FILENAME_PRODUCT') &&
             let ceonUriMappingHiddenURI = document.createElement("div");
             ceonUriMappingHiddenURI.innerHTML = <?= json_encode($ceon_uri_mapping_admin->productPreviewBuildHiddenFields()) ?>;
 
-            // Target the specific row inside the main form
-            classList = mainForm ? mainForm.getElementsByClassName("row text-right") : document.getElementsByClassName("row text-right");
-            place = classList[classList.length - 1];
-
-            if (!classList.length) {
-                formList = document.forms;
-                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            let hiddenPlace;
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("row text-right");
+                hiddenPlace = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
             }
 
-            if (place) {
-                place.appendChild(ceonUriMappingHiddenURI);
+            if (!hiddenPlace) {
+                let classList = document.getElementsByClassName("row text-right");
+                if (classList.length > 0) {
+                    hiddenPlace = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        hiddenPlace = lastForm[lastForm.length - 1];
+                    }
+                }
+            }
+
+            if (hiddenPlace) {
+                hiddenPlace.appendChild(ceonUriMappingHiddenURI);
             }
         });
     </script>
@@ -136,13 +172,30 @@ if (defined('FILENAME_MANUFACTURERS') &&
             echo json_encode($ceonUriMappingDiv);
             ?>;
 
-            let classList = document.getElementsByClassName("row infoBoxContent");
-            let place = classList[classList.length - 1];
-            if (!classList.length) {
-                let formList = document.forms;
-                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            let mainForm = document.forms['manufacturers'];
+            let place;
+
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("row infoBoxContent");
+                place = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
             }
-            place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+
+            if (!place) {
+                let classList = document.getElementsByClassName("row infoBoxContent");
+                if (classList.length > 0) {
+                    place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
+                }
+            }
+
+            if (place && place.parentElement) {
+                place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+            }
         });
     </script>
 <?php }
@@ -172,13 +225,30 @@ if (defined('FILENAME_MANUFACTURERS') &&
             echo json_encode($ceonUriMappingDiv);
             ?>;
 
-            let classList = document.getElementsByClassName("<?=$ceon_class_name; ?>");
-            let place = classList[classList.length - 1];
-            if (!classList.length) {
-                let formList = document.forms;
-                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            let mainForm = document.forms['manufacturers'];
+            let place;
+
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("<?=$ceon_class_name; ?>");
+                place = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
             }
-            place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+
+            if (!place) {
+                let classList = document.getElementsByClassName("<?=$ceon_class_name; ?>");
+                if (classList.length > 0) {
+                    place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
+                }
+            }
+
+            if (place && place.parentElement) {
+                place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+            }
         });
     </script>
 <?php }
@@ -204,13 +274,30 @@ if (defined('FILENAME_EZPAGES_ADMIN') &&
             echo json_encode($ceon_uri_mapping_admin->buildEZPageURIMappingFieldsForm());
             ?>;
 
-            let classList = document.getElementsByClassName("form-group");
-            let place = classList[classList.length - 1];
-            if (!classList.length) {
-                let formList = document.forms;
-                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            let mainForm = document.forms['ezpage_form'];
+            let place;
+
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("form-group");
+                place = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
             }
-            place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+
+            if (!place) {
+                let classList = document.getElementsByClassName("form-group");
+                if (classList.length > 0) {
+                    place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
+                }
+            }
+
+            if (place && place.parentElement) {
+                place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+            }
         });
     </script>
 <?php }
@@ -243,7 +330,9 @@ if (defined('FILENAME_CATEGORY_PRODUCT_LISTING') &&
                 if (classList[i].value === "duplicate") {
                     classList = document.getElementsByClassName('row infoBoxContent duplicate-only');
                     // insert URI div after all other rows of Duplicate options
-                    classList[classList.length-1].insertAdjacentElement('afterend', ceonUriMappingGeneratedURI);
+                    if (classList.length > 0) {
+                        classList[classList.length-1].insertAdjacentElement('afterend', ceonUriMappingGeneratedURI);
+                    }
                     break;
                 }
             }
@@ -274,13 +363,30 @@ if (defined('FILENAME_CATEGORY_PRODUCT_LISTING') &&
             echo json_encode(/*utf8_encode*/($ceonUriMappingMoveProduct));
             ?>;
 
-            let classList = document.getElementsByClassName("row infoBoxContent");
-            let place = classList[classList.length - 1];
-            if (!classList.length) {
-                let formList = document.forms;
-                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            let mainForm = document.forms['move_product'];
+            let place;
+
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("row infoBoxContent");
+                place = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
             }
-            place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+
+            if (!place) {
+                let classList = document.getElementsByClassName("row infoBoxContent");
+                if (classList.length > 0) {
+                    place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
+                }
+            }
+
+            if (place && place.parentElement) {
+                place.parentElement.insertBefore(ceonUriMappingGeneratedURI, place);
+            }
         });
     </script>
 <?php }
@@ -306,13 +412,30 @@ if (defined('FILENAME_CATEGORIES') &&
             echo json_encode($text_str);
             ?>;
 
-            let classList = document.getElementsByClassName("form-group");
-            let place = classList[classList.length - 1];
-            if (!classList.length) {
-                let formList = document.forms;
-                place = formList[formList.length - 1][formList[formList.length - 1].length - 1];
+            let mainForm = document.forms['categories'];
+            let place;
+
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("form-group");
+                place = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
             }
-            place.parentElement.appendChild(ceonUriMappingGeneratedURI);
+
+            if (!place) {
+                let classList = document.getElementsByClassName("form-group");
+                if (classList.length > 0) {
+                    place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
+                }
+            }
+
+            if (place && place.parentElement) {
+                place.parentElement.appendChild(ceonUriMappingGeneratedURI);
+            }
         });
     </script>
 <?php }
@@ -345,29 +468,26 @@ if (defined('FILENAME_CATEGORIES') &&
             // Introduced for compatibility with plugin Modern Admin Dashboard
             let targetForm = document.forms['categories'];
             let place;
+
             if (targetForm) {
-                // Find form-groups ONLY inside the categories form
                 let internalGroups = targetForm.getElementsByClassName("form-group");
-                // Target the last group (usually the buttons) to append near
-                if (internalGroups.length > 0) {
-                    place = internalGroups[internalGroups.length - 1];
-                }
+                place = internalGroups.length > 0 ? internalGroups[internalGroups.length - 1] : targetForm.lastElementChild;
             }
-            // Fallback: If 'categories' form isn't found, use the last group on the page (skips header)
+
+            // Global Fallback
             if (!place) {
                 let classList = document.getElementsByClassName("form-group");
                 if (classList.length > 0) {
                     place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
                 }
             }
-            // Legacy Fallback: If no form-groups exist at all
-            if (!place) {
-                let formList = document.forms;
-                if (formList.length > 0) {
-                    let lastForm = formList[formList.length - 1];
-                    place = lastForm[lastForm.length - 1];
-                }
-            }
+
             // Inject the Ceon Fields
             if (place && place.parentElement) {
                 place.parentElement.appendChild(ceonUriMappingGeneratedURI);
@@ -404,9 +524,30 @@ if (false &&
             echo json_encode($text_str);
             ?>;
 
-            let classList = document.getElementsByClassName("form-group");
-            let place = classList[classList.length - 1];
-            place.parentElement.appendChild(ceonUriMappingGeneratedURI);
+            let mainForm = document.forms['categories'];
+            let place;
+
+            if (mainForm) {
+                let classList = mainForm.getElementsByClassName("form-group");
+                place = classList.length > 0 ? classList[classList.length - 1] : mainForm.lastElementChild;
+            }
+
+            if (!place) {
+                let classList = document.getElementsByClassName("form-group");
+                if (classList.length > 0) {
+                    place = classList[classList.length - 1];
+                } else {
+                    let formList = document.forms;
+                    if (formList.length > 0) {
+                        let lastForm = formList[formList.length - 1];
+                        place = lastForm[lastForm.length - 1];
+                    }
+                }
+            }
+
+            if (place && place.parentElement) {
+                place.parentElement.appendChild(ceonUriMappingGeneratedURI);
+            }
         });
     </script>
 <?php }
